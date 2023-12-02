@@ -1,134 +1,163 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0x4CFFC673),
-      appBar: AppBar(
-        backgroundColor: Color(0x4CFFC673),
-        title: Text(
-          'Четыре лапы',
-          style: TextStyle(
-            color: Color(0xFF0261BC),
-            fontSize: 36,
-            fontFamily: 'Comforter',
-            fontWeight: FontWeight.w400,
-            height: 0,
-          ),
-        ),
-        elevation: 0,
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        child: Container(
+          width: size.width,
+          height: size.height,
+          padding: EdgeInsets.only(top: 30, left: 20, right: 20),
+          color: Color(0x4CFFC673),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Text("Авторизация",
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'Четыре лапы',
+                  style: TextStyle(
+                    color: Color(0xFF0261BC),
+                    fontSize: 36,
+                    fontFamily: 'Comforter',
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.54,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Авторизация',
                   style: TextStyle(
                     color: Color(0xFF0261BC),
                     fontSize: 24,
                     fontFamily: 'Raleway',
                     fontWeight: FontWeight.w500,
-                    height: -5,
-                  ),
-                  textAlign: TextAlign.center),
-              Padding(
-                padding: EdgeInsets.only(top: 70),
-                child: Column(children: <Widget>[
-                  Text(
-                    'Электронная почта',
-                    style: TextStyle(height: -3),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Введите адрес электронной почты',
-                      border: OutlineInputBorder(),
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                ]),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 70),
-                child: Column(children: <Widget>[
-                  Text('Пароль',
-                      style: TextStyle(height: -3), textAlign: TextAlign.left),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Введите пароль',
-                      border: OutlineInputBorder(),
-                    ),
-                    obscureText: true,
-                  ),
-                ]),
-              ),
-              SizedBox(height: 24.0),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
-                  backgroundColor: Color(0xFF3B6BE7),
-                ),
-                onPressed: () {
-                  // Действия по входу
-                },
-                child: Text(
-                  'Войти',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              Container(
-                width: 328,
-                child: Text(
-                  'или войти с помощью',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w200,
-                    height: 3,
                   ),
                 ),
               ),
-              Container(
-                  child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                    Container(
-                        width: 24,
-                        height: 24,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(),
-                        child: Row(children: [
-                          Expanded(
-                            child: Image(
-                                image: NetworkImage(
-                                    'https://static-00.iconduck.com/assets.00/vk-icon-2048x2048-vg727mul.png')),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Электронная почта',
+                        style: TextStyle(
+                          color: Color(0xFF0261BC),
+                          fontSize: 15,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          filled: true,
+                          labelText: 'Введите вашу почту',
+                          fillColor: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Пароль',
+                        style: TextStyle(
+                          color: Color(0xFF0261BC),
+                          fontSize: 15,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          filled: true,
+                          labelText: 'Введите пароль',
+                          fillColor: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        child: Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Войти',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF3B6BE7),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text('или войти с помощью',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w200,
+                            height: 0.09,
                           ),
-                        ])),
-                  ])),
-                  SizedBox(height: 20,),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Восстановить пароль',
-                  style: TextStyle(
-                    color: Color(0xFF4BB2F9),
-                    fontSize: 16,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w500,
-                    height: 0.08,
-                    letterSpacing: 0.10,
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+                      Align(
+                        child: Image(
+                          alignment: Alignment.center,
+                          image: AssetImage('assets/images/vk.png'),
+                        ),
+                        
+                      ),
+                      SizedBox(height: 30,),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Восстановить пароль',
+                          style: TextStyle(
+                            color: Color(0xFF4BB2F9),
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+                ],
               ),
             ],
           ),
+
         ),
       ),
     );

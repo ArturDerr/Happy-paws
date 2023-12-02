@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:laps/pages/login.dart';
+import 'package:laps/pages/auth.dart';
+import 'package:laps/pages/registration.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,8 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => AuthPage(),
+        '/login': (context) => LoginPage(),
+        '/registration': (context) => RegistrPage(),
+      },
     );
   }
 }
-
