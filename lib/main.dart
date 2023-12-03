@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:laps/pages/home.dart';
 import 'package:laps/pages/login.dart';
 import 'package:laps/pages/auth.dart';
 import 'package:laps/pages/registration.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => AuthPage(),
         '/login': (context) => LoginPage(),
         '/registration': (context) => RegistrPage(),
+        '/home': (context) => HomePage(),
       },
     );
   }

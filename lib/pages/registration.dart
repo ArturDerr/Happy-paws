@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:laps/repos/user_repository.dart';
+import 'package:http/http.dart' as http;
 
 class RegistrPage extends StatefulWidget {
   const RegistrPage({super.key});
@@ -9,9 +13,35 @@ class RegistrPage extends StatefulWidget {
   _RegistrPage createState() => _RegistrPage();
 }
 
+
+
 class _RegistrPage extends State {
+    final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> _register() async {
+    var url = Uri.parse('http://127.0.0.1:8080/api/users/registr'); // Замените на ваш URL-адрес регистрации
+
+    var data = {
+      'email': _usernameController.text,
+      'password': _passwordController.text,
+    };
+
+    var body = json.encode(data);
+
+    var response = await http.post(url, body: body);
+
+    if (response.statusCode == 200) {
+      // Успешная регистрация
+      print('Успешная регистрация');
+    } else {
+      // Ошибка регистрации
+      print('Ошибка регистрации');
+    }
+  }
   @override
   Widget build(BuildContext context) {
+    String _email = '';
     String _pass = "";
     String _2Pass = "";
     final size = MediaQuery.of(context).size;
@@ -76,10 +106,15 @@ class _RegistrPage extends State {
                         height: 0,
                       ),
                       TextField(
+                        onChanged: (email) {
+                          controller: _usernameController;
+                          setState(() {
+                            _email = email;
+                          });
+                        },
                         decoration: InputDecoration(
                           filled: true,
                           labelText: 'Введите вашу почту',
-                          
                           fillColor: Colors.white,
                         ),
                       ),
@@ -99,11 +134,10 @@ class _RegistrPage extends State {
                         height: 2,
                       ),
                       TextField(
-                        
+                        controller: _passwordController,
                         onChanged: (password) {
                           _pass = password;
                         },
-                        
                         obscureText: true,
                         decoration: InputDecoration(
                           filled: true,
@@ -132,8 +166,6 @@ class _RegistrPage extends State {
                         decoration: InputDecoration(
                           filled: true,
                           labelText: 'Повторите пароль',
-                          
-                          
                           fillColor: Colors.white,
                         ),
                       ),
@@ -176,13 +208,7 @@ class _RegistrPage extends State {
                 child: Column(
                   children: [
                     ElevatedButton(
-                      onPressed: () {
-                        if(_pass == _2Pass) {
-                          print("ok");
-                        }else {
-                          print("не совпадают");
-                        }
-                      },
+                      // onPressed: _register,
                       child: Text(
                         'Зарегистрироваться',
                         style: TextStyle(
