@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:laps/model/registration_model.dart';
+import 'package:laps/model/user_model.dart';
 import 'package:laps/repos/user_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,24 +20,7 @@ class _RegistrPage extends State {
 
   String email = '';
   String password = '';
-
-  Future<void> registerUser() async {
-    final response = await http.post(
-      Uri.parse('http://127.0.0.1:8080/api/users/registr'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'email': email, 'password': password}),
-    );
-  
-    if (response.statusCode == 200) {
-      // Registration successful
-      // Handle further actions or navigate to another screen
-      Navigator.pushNamed(context, '/home');
-    } else {
-      // Registration failed
-      print('Registration failed');
-      // Handle error, show error message, etc.
-    }
-  }
+  String passwordCheck = '';
 
   @override
   Widget build(BuildContext context) {
@@ -110,9 +93,10 @@ class _RegistrPage extends State {
                           });
                         },
                         decoration: InputDecoration(
-                          filled: true,
-                          labelText: 'Введите вашу почту',
-                          fillColor: Colors.white,
+                          hintText: 'Введите вашу почту',
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            fillColor: Colors.white,
                         ),
                       ),
                       SizedBox(
@@ -139,9 +123,10 @@ class _RegistrPage extends State {
                         },
                         obscureText: true,
                         decoration: InputDecoration(
-                          filled: true,
-                          labelText: 'Придумайте пароль',
-                          fillColor: Colors.white,
+                          hintText: 'Придумайте пароль',
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            fillColor: Colors.white,
                         ),
                       ),
                       SizedBox(
@@ -160,15 +145,18 @@ class _RegistrPage extends State {
                         height: 0,
                       ),
                       TextField(
-                        // onChanged: (password) {
-                          
-                        // },
+                        onChanged: (value) {
+                          setState(() {
+                            passwordCheck = value;
+                          });
+                        },
                         obscureText: true,
                         decoration: InputDecoration(
-                            hintText: 'Hint Text',
+                            hintText: 'Повторите пароль',
                             border: OutlineInputBorder(),
                             filled: true,
-                            fillColor: Colors.white),
+                            fillColor: Colors.white,
+                          ),
                       ),
                     ],
                   ),
@@ -209,9 +197,17 @@ class _RegistrPage extends State {
                 child: Column(
                   children: [
                     ElevatedButton(
-                     onPressed: () {
-                      registerUser();
-                     },
+                      onPressed: () {
+                        if (password == passwordCheck) {
+                          if (email != '' && password != '') {
+                            UserRepository()
+                                .registerUser(email, password, context);
+                          } else {
+                            print("error");
+                          }
+                        }
+                        ;
+                      },
                       child: Text(
                         'Зарегистрироваться',
                         style: TextStyle(

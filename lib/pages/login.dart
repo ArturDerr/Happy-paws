@@ -67,9 +67,10 @@ class LoginPage extends StatelessWidget {
                       ),
                       TextField(
                         decoration: InputDecoration(
-                          filled: true,
-                          labelText: 'Введите вашу почту',
-                          fillColor: Colors.white,
+                          hintText: 'Введите вашу почту',
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            fillColor: Colors.white,
                         ),
                       ),
                       SizedBox(
@@ -89,9 +90,10 @@ class LoginPage extends StatelessWidget {
                       ),
                       TextField(
                         decoration: InputDecoration(
-                          filled: true,
-                          labelText: 'Введите пароль',
-                          fillColor: Colors.white,
+                            hintText: 'Введите пароль',
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            fillColor: Colors.white,
                         ),
                       ),
                       SizedBox(
