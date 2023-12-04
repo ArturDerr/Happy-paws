@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:laps/model/registration_model.dart';
 import 'package:laps/repos/user_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,37 +14,33 @@ class RegistrPage extends StatefulWidget {
   _RegistrPage createState() => _RegistrPage();
 }
 
-
-
 class _RegistrPage extends State {
-    final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _register() async {
-    var url = Uri.parse('http://127.0.0.1:8080/api/users/registr'); // Замените на ваш URL-адрес регистрации
+  String email = '';
+  String password = '';
 
-    var data = {
-      'email': _usernameController.text,
-      'password': _passwordController.text,
-    };
-
-    var body = json.encode(data);
-
-    var response = await http.post(url, body: body);
-
+  Future<void> registerUser() async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:8080/api/users/registr'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': email, 'password': password}),
+    );
+  
     if (response.statusCode == 200) {
-      // Успешная регистрация
-      print('Успешная регистрация');
+      // Registration successful
+      // Handle further actions or navigate to another screen
+      Navigator.pushNamed(context, '/home');
     } else {
-      // Ошибка регистрации
-      print('Ошибка регистрации');
+      // Registration failed
+      print('Registration failed');
+      // Handle error, show error message, etc.
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    String _email = '';
-    String _pass = "";
-    String _2Pass = "";
     final size = MediaQuery.of(context).size;
     bool isSwitched = false;
     return Scaffold(
@@ -106,10 +103,10 @@ class _RegistrPage extends State {
                         height: 0,
                       ),
                       TextField(
-                        onChanged: (email) {
-                          controller: _usernameController;
+                        controller: _usernameController,
+                        onChanged: (value) {
                           setState(() {
-                            _email = email;
+                            email = value;
                           });
                         },
                         decoration: InputDecoration(
@@ -135,8 +132,10 @@ class _RegistrPage extends State {
                       ),
                       TextField(
                         controller: _passwordController,
-                        onChanged: (password) {
-                          _pass = password;
+                        onChanged: (value) {
+                          setState(() {
+                            password = value;
+                          });
                         },
                         obscureText: true,
                         decoration: InputDecoration(
@@ -145,7 +144,9 @@ class _RegistrPage extends State {
                           fillColor: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 5,),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Text(
                         'Пароль повторно',
                         style: TextStyle(
@@ -159,15 +160,15 @@ class _RegistrPage extends State {
                         height: 0,
                       ),
                       TextField(
-                        onChanged: (password) {
-                          _2Pass = password;
-                        },
+                        // onChanged: (password) {
+                          
+                        // },
                         obscureText: true,
                         decoration: InputDecoration(
-                          filled: true,
-                          labelText: 'Повторите пароль',
-                          fillColor: Colors.white,
-                        ),
+                            hintText: 'Hint Text',
+                            border: OutlineInputBorder(),
+                            filled: true,
+                            fillColor: Colors.white),
                       ),
                     ],
                   ),
@@ -208,7 +209,9 @@ class _RegistrPage extends State {
                 child: Column(
                   children: [
                     ElevatedButton(
-                      // onPressed: _register,
+                     onPressed: () {
+                      registerUser();
+                     },
                       child: Text(
                         'Зарегистрироваться',
                         style: TextStyle(
