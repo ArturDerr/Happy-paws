@@ -20,4 +20,19 @@ Future<void> registerUser(email, password, context) async {
       // Handle error, show error message, etc.
     }
   }
+
+  Future<void> loginUser(email, password, context) async {
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:8080/api/users/login'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': email, 'password': password}),
+    );
+    if (response.statusCode == 200) {
+      Navigator.pushNamed(context, '/home');
+    } else {
+      // Registration failed
+      print('Login failed');
+      // Handle error, show error message, etc.
+    }
+  }
 }

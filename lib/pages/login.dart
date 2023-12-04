@@ -1,8 +1,21 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:laps/repos/user_repository.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  _LoginPage createState() => _LoginPage();
+}
+
+
+class _LoginPage extends State {
+
+  String email = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -66,6 +79,11 @@ class LoginPage extends StatelessWidget {
                         height: 2,
                       ),
                       TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            email = value;
+                          });
+                        },
                         decoration: InputDecoration(
                           hintText: 'Введите вашу почту',
                             border: OutlineInputBorder(),
@@ -89,6 +107,11 @@ class LoginPage extends StatelessWidget {
                         height: 2,
                       ),
                       TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            password = value;
+                          });
+                        },
                         decoration: InputDecoration(
                             hintText: 'Введите пароль',
                             border: OutlineInputBorder(),
@@ -103,7 +126,13 @@ class LoginPage extends StatelessWidget {
                         child: Column(
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                if(email != '' && password != '') {
+                                  UserRepository().loginUser(email, password, context);
+                                }else {
+                                  print("error");
+                                }
+                              },
                               child: Text(
                                 'Войти',
                                 style: TextStyle(
