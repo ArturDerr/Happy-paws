@@ -53,6 +53,7 @@ class _RegistrPage extends State {
               SizedBox(
                 height: 25,
               ),
+              
               Align(
                 alignment: Alignment.center,
                 child: Text(

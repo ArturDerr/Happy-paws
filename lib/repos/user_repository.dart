@@ -15,6 +15,7 @@ Future<void> registerUser(email, password, context) async {
     );
     if (response.statusCode == 200) {
       Navigator.pushReplacementNamed(context, '/home');
+      
     } else {
       // Registration failed
       print('Registration failed');

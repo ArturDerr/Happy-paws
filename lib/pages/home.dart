@@ -18,7 +18,6 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              
               Text('${DataBloc().email}')
             ],
           ),
