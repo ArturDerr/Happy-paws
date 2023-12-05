@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:laps/model/user_model.dart';
+import 'package:laps/pages/currents/current_user.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -16,7 +18,8 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('home')
+              
+              Text('${DataBloc().email}')
             ],
           ),
         ),

@@ -2,6 +2,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:laps/model/user_model.dart';
+import 'package:laps/pages/currents/current_user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
 
@@ -11,9 +13,8 @@ Future<void> registerUser(email, password, context) async {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email, 'password': password}),
     );
-  
     if (response.statusCode == 200) {
-      Navigator.pushNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, '/home');
     } else {
       // Registration failed
       print('Registration failed');
@@ -26,13 +27,29 @@ Future<void> registerUser(email, password, context) async {
       Uri.parse('http://127.0.0.1:8080/api/users/login'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email, 'password': password}),
+      
     );
-    if (response.statusCode == 200) {
-      Navigator.pushNamed(context, '/home');
+    User(email: email, password: password);
+    
+    if (response.statusCode == 200 && response.body != '') {
+      print(response.body);
+      Navigator.pushReplacementNamed(context, '/home');
     } else {
       // Registration failed
       print('Login failed');
       // Handle error, show error message, etc.
     }
+  }
+
+  void findUser(email) async {
+    var url = Uri.parse('http://127.0.0.1:8080/api/users/$email');
+
+    var response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    print(response.body);
+  } else {
+    print('Ошибка при запросе: ${response.statusCode}');
+  }
   }
 }

@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:laps/model/user_model.dart';
+import 'package:laps/pages/currents/current_user.dart';
 import 'package:laps/repos/user_repository.dart';
 
 class LoginPage extends StatefulWidget {
@@ -129,7 +131,9 @@ class _LoginPage extends State {
                               onPressed: () {
                                 if(email != '' && password != '') {
                                   UserRepository().loginUser(email, password, context);
+                                  
                                 }else {
+                                  
                                   print("error");
                                 }
                               },

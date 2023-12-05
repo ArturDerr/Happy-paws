@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:laps/model/user_model.dart';
+import 'package:laps/pages/currents/current_user.dart';
 import 'package:laps/repos/user_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -202,6 +203,7 @@ class _RegistrPage extends State {
                           if (email != '' && password != '') {
                             UserRepository()
                                 .registerUser(email, password, context);
+                              DataBloc().setEmail(email);
                           } else {
                             print("error");
                           }
