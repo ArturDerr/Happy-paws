@@ -2,9 +2,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:laps/model/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:laps/pages/currents/current_user.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  _HomePage createState() => _HomePage();
+}
+
+class _HomePage extends State {
+  String email = '';
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -15,14 +25,23 @@ class HomePage extends StatelessWidget {
           height: size.height,
           padding: EdgeInsets.only(top: 30, left: 25, right: 20),
           color: Color(0x4CFFC673),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('${DataBloc().email}')
-            ],
+          child: FutureBuilder<String>(
+            future: getTextFromPreferences(), // Метод для получения текста из Shared Preferences
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.hasData) {
+                return Text(snapshot.data.toString()); // Вывод текста в текстовом поле
+              }
+              return CircularProgressIndicator(); // Отображение индикатора загрузки, пока данные не получены
+            },
           ),
         ),
       ),
     );
   }
+}
+
+Future<String> getTextFromPreferences() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String text = prefs.getString('emailKey').toString(); // Получение текста из Shared Preferences
+  return text ?? ''; // Возвращение текста или пустой строки в случае его отсутствия
 }

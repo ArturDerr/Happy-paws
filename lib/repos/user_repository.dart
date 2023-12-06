@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
 
+  static const emailKey = 'emailKey';
+
 Future<void> registerUser(email, password, context) async {
     final response = await http.post(
       Uri.parse('http://127.0.0.1:8080/api/users/registr'),
@@ -15,7 +17,10 @@ Future<void> registerUser(email, password, context) async {
     );
     if (response.statusCode == 200) {
       Navigator.pushReplacementNamed(context, '/home');
-      
+        var prefs = await SharedPreferences.getInstance();
+        prefs.setString('emailKey', email);
+        print(prefs.getString(emailKey));
+        // await prefs.setString('password', password);
     } else {
       // Registration failed
       print('Registration failed');
@@ -30,10 +35,13 @@ Future<void> registerUser(email, password, context) async {
       body: jsonEncode({'email': email, 'password': password}),
       
     );
-    User(email: email, password: password);
+    // User(email: email, password: password);
     
     if (response.statusCode == 200 && response.body != '') {
       print(response.body);
+        var prefs = await SharedPreferences.getInstance();
+        prefs.setString('emailKey', email);
+        print(prefs.getString(emailKey));
       Navigator.pushReplacementNamed(context, '/home');
     } else {
       // Registration failed
@@ -44,7 +52,6 @@ Future<void> registerUser(email, password, context) async {
 
   void findUser(email) async {
     var url = Uri.parse('http://127.0.0.1:8080/api/users/$email');
-
     var response = await http.get(url);
 
   if (response.statusCode == 200) {

@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DataBloc {
 
   static final DataBloc _singleton = DataBloc._internal();
-  static const emailKey = 'emailKey';
+  
 
   factory DataBloc() {
     return _singleton;
@@ -17,9 +17,6 @@ class DataBloc {
 
   void setEmail(String email) async {
     _email = email;
-    var prefs = await SharedPreferences.getInstance();
-    prefs.setString(emailKey, email);
-    print(prefs);
   }
 
 }

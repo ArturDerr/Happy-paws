@@ -19,7 +19,6 @@ class AuthPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              
                 Text('Сервис по выгулу\nдомашних питомцев',
                 style: TextStyle(
                   color: Color(0xFF0260BC),

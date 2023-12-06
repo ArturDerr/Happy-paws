@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:laps/model/user_model.dart';
 import 'package:laps/pages/currents/current_user.dart';
 import 'package:laps/repos/user_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,7 +14,10 @@ class LoginPage extends StatefulWidget {
 }
 
 
+
 class _LoginPage extends State {
+
+  
 
   String email = '';
   String password = '';
