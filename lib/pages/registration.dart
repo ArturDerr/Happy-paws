@@ -2,9 +2,11 @@
 
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:laps/model/user_model.dart';
 import 'package:laps/pages/currents/current_user.dart';
+import 'package:laps/pages/custom_check_box.dart';
 import 'package:laps/repos/user_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -53,7 +55,6 @@ class _RegistrPage extends State {
               SizedBox(
                 height: 25,
               ),
-              
               Align(
                 alignment: Alignment.center,
                 child: Text(
@@ -85,7 +86,7 @@ class _RegistrPage extends State {
                         ),
                       ),
                       SizedBox(
-                        height: 0,
+                        height: 5,
                       ),
                       TextField(
                         controller: _usernameController,
@@ -96,13 +97,28 @@ class _RegistrPage extends State {
                         },
                         decoration: InputDecoration(
                           hintText: 'Введите вашу почту',
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintStyle: TextStyle(
+                            color: Color(0x9966727F),
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w400,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                          border: OutlineInputBorder(
+                            // устанавливаем тонкую границу
+                            borderRadius: BorderRadius.circular(0),
+                            borderSide: BorderSide(
+                              color: Colors.grey, // устанавливаем цвет границы
+                              width: 1.0, // устанавливаем толщину границы
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
                       Text(
                         'Пароль',
@@ -114,7 +130,7 @@ class _RegistrPage extends State {
                         ),
                       ),
                       SizedBox(
-                        height: 2,
+                        height: 5,
                       ),
                       TextField(
                         controller: _passwordController,
@@ -126,13 +142,28 @@ class _RegistrPage extends State {
                         obscureText: true,
                         decoration: InputDecoration(
                           hintText: 'Придумайте пароль',
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintStyle: TextStyle(
+                            color: Color(0x9966727F),
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w400,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                          border: OutlineInputBorder(
+                            // устанавливаем тонкую границу
+                            borderRadius: BorderRadius.circular(0),
+                            borderSide: BorderSide(
+                              color: Colors.grey, // устанавливаем цвет границы
+                              width: 1.0, // устанавливаем толщину границы
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
                       Text(
                         'Пароль повторно',
@@ -144,7 +175,7 @@ class _RegistrPage extends State {
                         ),
                       ),
                       SizedBox(
-                        height: 0,
+                        height: 5,
                       ),
                       TextField(
                         onChanged: (value) {
@@ -154,11 +185,26 @@ class _RegistrPage extends State {
                         },
                         obscureText: true,
                         decoration: InputDecoration(
-                            hintText: 'Повторите пароль',
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
+                          hintText: 'Повторите пароль',
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintStyle: TextStyle(
+                            color: Color(0x9966727F),
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w400,
+                            height: 0.08,
+                            letterSpacing: 0.10,
                           ),
+                          border: OutlineInputBorder(
+                            // устанавливаем тонкую границу
+                            borderRadius: BorderRadius.circular(0),
+                            borderSide: BorderSide(
+                              color: Colors.grey, // устанавливаем цвет границы
+                              width: 1.0, // устанавливаем толщину границы
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -183,13 +229,14 @@ class _RegistrPage extends State {
                   SizedBox(
                     width: 10,
                   ),
-                  Switch(
-                      value: isSwitched,
-                      onChanged: (bool value) {
-                        setState(() {
-                          isSwitched = value;
-                        });
-                      }),
+                  CustomCheckbox(
+                    value: isSwitched,
+                    onChanged: (value) {
+                      setState(() {
+                        isSwitched = value ?? false;
+                      });
+                    },
+                  ),
                 ],
               ),
               SizedBox(
@@ -198,29 +245,62 @@ class _RegistrPage extends State {
               Container(
                 child: Column(
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (password == passwordCheck) {
-                          if (email != '' && password != '') {
-                            UserRepository()
-                                .registerUser(email, password, context);
+                    Align(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (password == passwordCheck) {
+                            if (email != '' && password != '') {
+                              UserRepository()
+                                  .registerUser(email, password, context);
                               DataBloc().setEmail(email);
-                          } else {
-                            print("error");
+                            } else {
+                              print("error");
+                            }
                           }
-                        }
-                        ;
-                      },
-                      child: Text(
-                        'Зарегистрироваться',
-                        style: TextStyle(
-                          color: Colors.white,
+                          ;
+                        },
+                        child: Text(
+                          'Зарегистрироваться',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: 'IBM Plex Sans',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF3B6BE7),
+                          minimumSize: Size(double.infinity, 44),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF3B6BE7),
-                      ),
                     ),
+                    SizedBox(height: 20,),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'или войти с помощью',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w200,
+                            height: 0.09,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+                      Align(
+                        child: Image(
+                          alignment: Alignment.center,
+                          image: AssetImage('assets/images/vk.png'),
+                        ),
+                      ),
                   ],
                 ),
               ),

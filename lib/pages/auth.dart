@@ -19,7 +19,8 @@ class AuthPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-                Text('Сервис по выгулу\nдомашних питомцев',
+              Text(
+                'Сервис по выгулу\nдомашних питомцев',
                 style: TextStyle(
                   color: Color(0xFF0260BC),
                   fontSize: 32,
@@ -28,8 +29,7 @@ class AuthPage extends StatelessWidget {
                   fontWeight: FontWeight.w300,
                   height: 0,
                 ),
-                ),
-              
+              ),
               Column(
                 children: [
                   SizedBox(
@@ -81,22 +81,25 @@ class AuthPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/login');
-                            },
-                            child: Text(
-                              'Войти',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w500,
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/login');
+                              },
+                              child: Text(
+                                'Войти',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontFamily: 'Raleway',
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF3B6BE7),
-                            ),
-                          ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF3B6BE7),
+                                minimumSize: Size(149, 44),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              )),
                           Padding(
                             padding: EdgeInsets.only(left: 40),
                             child: ElevatedButton(
@@ -114,9 +117,13 @@ class AuthPage extends StatelessWidget {
                               ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(0xFF3B6BE7),
+                                minimumSize: Size(149, 44),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ]),

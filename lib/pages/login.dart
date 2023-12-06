@@ -1,10 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
-import 'package:laps/model/user_model.dart';
-import 'package:laps/pages/currents/current_user.dart';
 import 'package:laps/repos/user_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,12 +10,7 @@ class LoginPage extends StatefulWidget {
   _LoginPage createState() => _LoginPage();
 }
 
-
-
 class _LoginPage extends State {
-
-  
-
   String email = '';
   String password = '';
 
@@ -91,10 +83,25 @@ class _LoginPage extends State {
                           });
                         },
                         decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
                           hintText: 'Введите вашу почту',
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
+                          hintStyle: TextStyle(
+                            color: Color(0x9966727F),
+                              fontSize: 16,
+                              fontFamily: 'Raleway',
+                              fontWeight: FontWeight.w400,
+                              height: 0.08,
+                              letterSpacing: 0.10,
+                          ),
+                          
+                          border: OutlineInputBorder( // устанавливаем тонкую границу
+                            borderRadius: BorderRadius.circular(0),
+                            borderSide: BorderSide(
+                            color: Colors.grey, // устанавливаем цвет границы
+                            width: 1.0, // устанавливаем толщину границы
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -118,11 +125,28 @@ class _LoginPage extends State {
                             password = value;
                           });
                         },
+                        obscureText: true,
                         decoration: InputDecoration(
-                            hintText: 'Введите пароль',
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
+                          hintText: 'Введите пароль',
+                          filled: true,
+                          fillColor: Colors.white,
+
+                          hintStyle: TextStyle(
+                            color: Color(0x9966727F),
+                              fontSize: 16,
+                              fontFamily: 'Raleway',
+                              fontWeight: FontWeight.w400,
+                              height: 0.08,
+                              letterSpacing: 0.10,
+                          ),
+                          
+                          border: OutlineInputBorder( // устанавливаем тонкую границу
+                            borderRadius: BorderRadius.circular(0),
+                            borderSide: BorderSide(
+                            color: Colors.grey, // устанавливаем цвет границы
+                            width: 1.0, // устанавливаем толщину границы
+                            ),
+                        ),
                         ),
                       ),
                       SizedBox(
@@ -131,33 +155,47 @@ class _LoginPage extends State {
                       Container(
                         child: Column(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                if(email != '' && password != '') {
-                                  UserRepository().loginUser(email, password, context);
-                                  
-                                }else {
-                                  
-                                  print("error");
-                                }
-                              },
-                              child: Text(
-                                'Войти',
-                                style: TextStyle(
-                                  color: Colors.white,
+                            Align(
+                              alignment: Alignment.center,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (email != '' && password != '') {
+                                    UserRepository()
+                                        .loginUser(email, password, context);
+                                  } else {
+                                    print("error");
+                                  }
+                                },
+                                child: Text(
+                                  'Войти',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'IBM Plex Sans',
+                                    fontWeight: FontWeight.w500,
+                                    height: 0.08,
+                                    letterSpacing: 0.10,      
+                                  ),
                                 ),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFF3B6BE7),
-                              ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xFF3B6BE7),
+                                  minimumSize: Size(double.infinity, 44),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                )),
                             ),
+                            
                           ],
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Align(
                         alignment: Alignment.center,
-                        child: Text('или войти с помощью',
+                        child: Text(
+                          'или войти с помощью',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 14,
@@ -167,15 +205,18 @@ class _LoginPage extends State {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Align(
                         child: Image(
                           alignment: Alignment.center,
                           image: AssetImage('assets/images/vk.png'),
                         ),
-                        
                       ),
-                      SizedBox(height: 30,),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Align(
                         alignment: Alignment.center,
                         child: Text(
@@ -196,7 +237,6 @@ class _LoginPage extends State {
               ),
             ],
           ),
-
         ),
       ),
     );

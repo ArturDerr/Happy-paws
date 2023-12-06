@@ -26,12 +26,12 @@ class _HomePage extends State {
           padding: EdgeInsets.only(top: 30, left: 25, right: 20),
           color: Color(0x4CFFC673),
           child: FutureBuilder<String>(
-            future: getTextFromPreferences(), // Метод для получения текста из Shared Preferences
+            future: getTextFromPreferences(),
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data.toString()); // Вывод текста в текстовом поле
+                return Text(snapshot.data.toString());
               }
-              return CircularProgressIndicator(); // Отображение индикатора загрузки, пока данные не получены
+              return CircularProgressIndicator();
             },
           ),
         ),
@@ -42,6 +42,6 @@ class _HomePage extends State {
 
 Future<String> getTextFromPreferences() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String text = prefs.getString('emailKey').toString(); // Получение текста из Shared Preferences
-  return text ?? ''; // Возвращение текста или пустой строки в случае его отсутствия
+  String text = prefs.getString('emailKey').toString();
+  return text ?? '';
 }
