@@ -280,27 +280,31 @@ class _RegistrPage extends State {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'или войти с помощью',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w200,
+                          height: 0.09,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                      child: Image(
                         alignment: Alignment.center,
-                        child: Text(
-                          'или войти с помощью',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontFamily: 'Raleway',
-                            fontWeight: FontWeight.w200,
-                            height: 0.09,
-                          ),
-                        ),
+                        image: AssetImage('assets/images/vk.png'),
                       ),
-                      SizedBox(height: 20,),
-                      Align(
-                        child: Image(
-                          alignment: Alignment.center,
-                          image: AssetImage('assets/images/vk.png'),
-                        ),
-                      ),
+                    ),
                   ],
                 ),
               ),
