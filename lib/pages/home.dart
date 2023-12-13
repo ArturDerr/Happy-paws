@@ -1,10 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
+}
+
+class Account extends StatefulWidget {
+  @override
+  _Account createState() => _Account();
 }
 
 class _MyBottomNavigationBarState extends State<HomePage> {
@@ -16,7 +22,7 @@ class _MyBottomNavigationBarState extends State<HomePage> {
     Page3(),
     Page4(),
     Page5(),
-    Page6(),
+    Account(),
   ];
 
   void _onItemTapped(int index) {
@@ -437,17 +443,436 @@ class Page5 extends StatelessWidget {
   }
 }
 
-class Page6 extends StatelessWidget {
+class _Account extends State {
+  String email = '';
+
+  // final ImagePicker _picker = ImagePicker();
+  // File? _image;
+  // Widget _buildAvatar() {
+  //   if (_image != null) {
+  //     return Container(
+  //       width: 100,
+  //       height: 100,
+  //       decoration: BoxDecoration(
+  //         shape: BoxShape.circle,
+  //         image: DecorationImage(
+  //           image: FileImage(_image!),
+  //           fit: BoxFit.cover,
+  //         ),
+  //       ),
+  //     );
+  //   } else {
+  //     return Container(
+  //       width: 100,
+  //       height: 100,
+  //       decoration: BoxDecoration(
+  //         shape: BoxShape.circle,
+  //         color: Colors.grey,
+  //       ),
+  //       child: Icon(
+  //         Icons.person,
+  //         color: Colors.white,
+  //         size: 50,
+  //       ),
+  //     );
+  //   }
+  // }
+
+  // Future<void> _pickImage() async {
+  //   final pickedImage = await _picker.getImage(source: ImageSource.gallery);
+  //   if (pickedImage != null) {
+  //     setState(() {
+  //       _image = File(pickedImage.path);
+  //     });
+  //   }
+  // }
+
+  // Future<void> _takePhoto() async {
+  //   final newImage = await _picker.getImage(source: ImageSource.camera);
+  //   if (newImage != null) {
+  //     setState(() {
+  //       _image = File(newImage.path);
+  //     });
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Аккаунт'),
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          width: size.width,
+          height: size.height,
+          padding: EdgeInsets.only(top: 15, left: 10, right: 10),
+          color: Color(0x4CFFC673),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'Четыре лапы',
+                  style: TextStyle(
+                    color: Color(0xFF0261BC),
+                    fontSize: 36,
+                    fontFamily: 'Comforter',
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.54,
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Container(
+                      width: 66,
+                      height: 66,
+                      decoration: ShapeDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                              'https://media.istockphoto.com/id/1300845620/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C-icon-flat-%D0%B8%D0%B7%D0%BE%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD-%D0%BD%D0%B0-%D0%B1%D0%B5%D0%BB%D0%BE%D0%BC-%D1%84%D0%BE%D0%BD%D0%B5-%D1%81%D0%B8%D0%BC%D0%B2%D0%BE%D0%BB-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-%D0%B8%D0%BB%D0%BB%D1%8E%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%B0.jpg?s=612x612&w=0&k=20&c=Po5TTi0yw6lM7qz6yay5vUbUBy3kAEWrpQmDaUMWnek='),
+                          fit: BoxFit.fill,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Аккаунт',
+                    style: TextStyle(
+                      color: Color(0xFF0261BC),
+                      fontSize: 24,
+                      fontFamily: 'IBM Plex Sans',
+                      fontWeight: FontWeight.w300,
+                      height: -3,
+                    ),
+                  ),
+                ],
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text('сменить фото'),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 18, top: 4),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: [
+                      FutureBuilder<String>(
+                        future: getTextFromPreferences(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<String> snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(
+                              'Привет, ' + snapshot.data.toString(),
+                              style: TextStyle(
+                                color: Color(0xFF0261BC),
+                                fontSize: 16,
+                                fontFamily: 'IBM Plex Sans',
+                                fontWeight: FontWeight.w300,
+                                height: -3,
+                              ),
+                            );
+                          }
+                          return CircularProgressIndicator();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Icon(Icons.refresh), // иконка
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Изменить ФИО',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          alignment: Alignment.centerLeft,
+                          minimumSize: Size(360, 56),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          backgroundColor: Color(0x59FFC673),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Icon(Icons.card_membership), // иконка
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Привязать способ оплаты',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          alignment: Alignment.centerLeft,
+                          minimumSize: Size(360, 56),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          backgroundColor: Color(0x59FFC673),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Icon(Icons.refresh), // иконка
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Изменить пароль',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          alignment: Alignment.centerLeft,
+                          minimumSize: Size(360, 56),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          backgroundColor: Color(0x59FFC673),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Icon(Icons.refresh), // иконка
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Изменить почту',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          alignment: Alignment.centerLeft,
+                          minimumSize: Size(360, 56),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          backgroundColor: Color(0x59FFC673),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Icon(Icons.smartphone), // иконка
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Изменить телефон',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          alignment: Alignment.centerLeft,
+                          minimumSize: Size(360, 56),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          backgroundColor: Color(0x59FFC673),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Icon(Icons.help), // иконка
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Служба поддержки',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          alignment: Alignment.centerLeft,
+                          minimumSize: Size(360, 56),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          backgroundColor: Color(0x59FFC673),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Выйти',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'IBM Plex Sans',
+                          fontWeight: FontWeight.w500,
+                          height: 0.08,
+                          letterSpacing: 0.10,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF3B6BE7),
+                        minimumSize: Size(150, 35),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Удалить аккаунт',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'IBM Plex Sans',
+                          fontWeight: FontWeight.w500,
+                          height: 0.08,
+                          letterSpacing: 0.10,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFF40D0D),
+                        minimumSize: Size(150, 35),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
 
-// Future<String> getTextFromPreferences() async {
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   String text = prefs.getString('emailKey').toString();
-//   return text ?? '';
-// }
+Future<String> getTextFromPreferences() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String text = prefs.getString('emailKey').toString();
+  return text ?? '';
+}
