@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:laps/repos/user_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -495,7 +496,12 @@ class _Account extends State {
   //     });
   //   }
   // }
+  Future<void> clearValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear(); // Очищаем все значения SharedPreferences
+  }
 
+  var currentEmail = '';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -577,6 +583,7 @@ class _Account extends State {
                         builder: (BuildContext context,
                             AsyncSnapshot<String> snapshot) {
                           if (snapshot.hasData) {
+                            currentEmail = snapshot.data.toString();
                             return Text(
                               'Привет, ' + snapshot.data.toString(),
                               style: TextStyle(
@@ -815,48 +822,59 @@ class _Account extends State {
                 alignment: Alignment.center,
                 child: Row(
                   children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Выйти',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'IBM Plex Sans',
-                          fontWeight: FontWeight.w500,
-                          height: 0.08,
-                          letterSpacing: 0.10,
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          clearValue();
+                          Navigator.pushReplacementNamed(context, '/');
+                        },
+                        child: Text(
+                          'Выйти',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: 'IBM Plex Sans',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
                         ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF3B6BE7),
-                        minimumSize: Size(150, 35),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF3B6BE7),
+                          minimumSize: Size(150, 35),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(
                       width: 20,
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Удалить аккаунт',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'IBM Plex Sans',
-                          fontWeight: FontWeight.w500,
-                          height: 0.08,
-                          letterSpacing: 0.10,
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/');
+                          UserRepository().deleteData(currentEmail);
+                          clearValue();
+                        },
+                        child: Text(
+                          'Удалить аккаунт',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: 'IBM Plex Sans',
+                            fontWeight: FontWeight.w500,
+                            height: 0.08,
+                            letterSpacing: 0.10,
+                          ),
                         ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFF40D0D),
-                        minimumSize: Size(150, 35),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFFF40D0D),
+                          minimumSize: Size(150, 35),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
                     ),
