@@ -65,7 +65,7 @@ class _LoginPage extends State {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Электронная почта',
+                        'Никнейм',
                         style: TextStyle(
                           color: Color(0xFF0261BC),
                           fontSize: 15,
@@ -85,21 +85,21 @@ class _LoginPage extends State {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: 'Введите вашу почту',
+                          hintText: 'Введите ваш никнейм',
                           hintStyle: TextStyle(
                             color: Color(0x9966727F),
-                              fontSize: 16,
-                              fontFamily: 'Raleway',
-                              fontWeight: FontWeight.w400,
-                              height: 0.08,
-                              letterSpacing: 0.10,
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w400,
+                            height: 0.08,
+                            letterSpacing: 0.10,
                           ),
-                          
-                          border: OutlineInputBorder( // устанавливаем тонкую границу
+                          border: OutlineInputBorder(
+                            // устанавливаем тонкую границу
                             borderRadius: BorderRadius.circular(0),
                             borderSide: BorderSide(
-                            color: Colors.grey, // устанавливаем цвет границы
-                            width: 1.0, // устанавливаем толщину границы
+                              color: Colors.grey, // устанавливаем цвет границы
+                              width: 1.0, // устанавливаем толщину границы
                             ),
                           ),
                         ),
@@ -130,23 +130,22 @@ class _LoginPage extends State {
                           hintText: 'Введите пароль',
                           filled: true,
                           fillColor: Colors.white,
-
                           hintStyle: TextStyle(
                             color: Color(0x9966727F),
-                              fontSize: 16,
-                              fontFamily: 'Raleway',
-                              fontWeight: FontWeight.w400,
-                              height: 0.08,
-                              letterSpacing: 0.10,
+                            fontSize: 16,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.w400,
+                            height: 0.08,
+                            letterSpacing: 0.10,
                           ),
-                          
-                          border: OutlineInputBorder( // устанавливаем тонкую границу
+                          border: OutlineInputBorder(
+                            // устанавливаем тонкую границу
                             borderRadius: BorderRadius.circular(0),
                             borderSide: BorderSide(
-                            color: Colors.grey, // устанавливаем цвет границы
-                            width: 1.0, // устанавливаем толщину границы
+                              color: Colors.grey, // устанавливаем цвет границы
+                              width: 1.0, // устанавливаем толщину границы
                             ),
-                        ),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -158,34 +157,33 @@ class _LoginPage extends State {
                             Align(
                               alignment: Alignment.center,
                               child: ElevatedButton(
-                                onPressed: () {
-                                  if (email != '' && password != '') {
-                                    UserRepository()
-                                        .loginUser(email, password, context);
-                                  } else {
-                                    print("error");
-                                  }
-                                },
-                                child: Text(
-                                  'Войти',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontFamily: 'IBM Plex Sans',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0.08,
-                                    letterSpacing: 0.10,      
+                                  onPressed: () {
+                                    if (email != '' && password != '') {
+                                      UserRepository()
+                                          .loginUser(email, password, context);
+                                    } else {
+                                      print("error");
+                                    }
+                                  },
+                                  child: Text(
+                                    'Войти',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontFamily: 'IBM Plex Sans',
+                                      fontWeight: FontWeight.w500,
+                                      height: 0.08,
+                                      letterSpacing: 0.10,
+                                    ),
                                   ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xFF3B6BE7),
-                                  minimumSize: Size(double.infinity, 44),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                )),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xFF3B6BE7),
+                                    minimumSize: Size(double.infinity, 44),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  )),
                             ),
-                            
                           ],
                         ),
                       ),

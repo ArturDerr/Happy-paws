@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
-import 'package:laps/repos/user_repository.dart';
-import 'package:http/http.dart' as http;
 
 class AuthPage extends StatelessWidget {
   @override
@@ -102,24 +100,26 @@ class AuthPage extends StatelessWidget {
                               )),
                           Padding(
                             padding: EdgeInsets.only(left: 40),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/registration');
-                              },
-                              child: Text(
-                                'Регистрация',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'Raleway',
-                                  fontWeight: FontWeight.w500,
+                            child: Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/registration');
+                                },
+                                child: Text(
+                                  'Регистрация',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontFamily: 'Raleway',
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFF3B6BE7),
-                                minimumSize: Size(149, 44),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xFF3B6BE7),
+                                  minimumSize: Size(149, 44),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
                               ),
                             ),

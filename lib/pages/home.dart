@@ -446,6 +446,7 @@ class Page5 extends StatelessWidget {
 
 class _Account extends State {
   String email = '';
+  String nickname = '';
 
   // final ImagePicker _picker = ImagePicker();
   // File? _image;
@@ -510,7 +511,7 @@ class _Account extends State {
         child: Container(
           width: size.width,
           height: size.height,
-          padding: EdgeInsets.only(top: 15, left: 10, right: 10),
+          padding: EdgeInsets.only(top: 14, left: 9, right: 9),
           color: Color(0x4CFFC673),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -584,6 +585,7 @@ class _Account extends State {
                             AsyncSnapshot<String> snapshot) {
                           if (snapshot.hasData) {
                             currentEmail = snapshot.data.toString();
+                            nickname = snapshot.data.toString();
                             return Text(
                               'Привет, ' + snapshot.data.toString(),
                               style: TextStyle(
@@ -615,9 +617,42 @@ class _Account extends State {
                     ),
                     Expanded(
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Введите почту'),
+                                  content: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        email = value;
+                                      });
+                                    },
+                                  ),
+                                  actions: [
+                                    Row(
+                                      children: [
+                                        TextButton(
+                                            onPressed: () {
+                                              UserRepository()
+                                                  .addEmail(nickname, email);
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('Добавить')),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('Закрыть'))
+                                      ],
+                                    )
+                                  ],
+                                );
+                              });
+                        },
                         child: Text(
-                          'Изменить ФИО',
+                          'Добавить почту',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,

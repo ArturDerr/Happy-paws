@@ -1,14 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:laps/model/user_model.dart';
 import 'package:laps/pages/currents/current_user.dart';
 import 'package:laps/pages/custom_check_box.dart';
 import 'package:laps/repos/user_repository.dart';
-import 'package:http/http.dart' as http;
 
 class RegistrPage extends StatefulWidget {
   const RegistrPage({super.key});
@@ -77,7 +72,7 @@ class _RegistrPage extends State {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Электронная почта',
+                        'Никнейм',
                         style: TextStyle(
                           color: Color(0xFF0261BC),
                           fontSize: 15,
@@ -96,7 +91,7 @@ class _RegistrPage extends State {
                           });
                         },
                         decoration: InputDecoration(
-                          hintText: 'Введите вашу почту',
+                          hintText: 'Введите ваш никнейм',
                           filled: true,
                           fillColor: Colors.white,
                           hintStyle: TextStyle(
