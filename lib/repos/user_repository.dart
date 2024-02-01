@@ -12,7 +12,7 @@ class UserRepository {
     var connectivityResult = await Connectivity().checkConnectivity();
 
     if (connectivityResult == ConnectivityResult.none) {
-      print('нет интернета');
+      print('Нет соединения');
     } else if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       final response = await http.post(
@@ -28,7 +28,7 @@ class UserRepository {
         // await prefs.setString('password', password);
       } else {
         // Registration failed
-        print('Registration failed');
+        print('Ошибка регистрации');
         // Handle error, show error message, etc.
       }
     }
@@ -39,7 +39,7 @@ class UserRepository {
     var connectivityResult = await Connectivity().checkConnectivity();
 
     if (connectivityResult == ConnectivityResult.none) {
-      print('нет интернета');
+      print('Нет соединения');
     } else if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       final response = await http.post(
@@ -56,7 +56,7 @@ class UserRepository {
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         // Registration failed
-        print('Login failed');
+        print('Ошибка входа');
         // Handle error, show error message, etc.
       }
     }
@@ -69,7 +69,7 @@ class UserRepository {
     final response = await http.delete(apiUrl);
 
     if (response.statusCode == 200) {
-      print('Данные удалены.');
+      print('Данные удалены');
     } else {
       print('Ошибка удаления данных: ${response.statusCode}');
     }
@@ -91,7 +91,7 @@ class UserRepository {
         print(email);
       } else {
         // Registration failed
-        print('Registration failed');
+        print('Ошибка регистрации');
         // Handle error, show error message, etc.
       }
     }

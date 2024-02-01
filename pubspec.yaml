@@ -70,6 +70,10 @@ flutter:
             weight: 400
       - family: Raleway
         fonts:
-          - asset: assets/fonts/Raleway-Italic-VariableFont_wght.ttf
+          - asset: assets/fonts/Raleway-Bold.ttf
             weight: 500
-            style: italic
+      - family: RalewayNormal
+        fonts:
+          - asset: assets/fonts/Raleway-Normal.ttf
+            weight: 500
+        

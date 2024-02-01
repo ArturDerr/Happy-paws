@@ -20,7 +20,7 @@ class AuthPage extends StatelessWidget {
               Text(
                 'Сервис по выгулу\nдомашних питомцев',
                 style: TextStyle(
-                  color: Color(0xFF0260BC),
+                  color: Color.fromARGB(255, 162, 163, 163),
                   fontSize: 32,
                   fontStyle: FontStyle.italic,
                   fontFamily: 'Raleway',
@@ -44,21 +44,21 @@ class AuthPage extends StatelessWidget {
                     height: 40,
                   ),
                   Text(
-                    'Четыре лапы',
+                    'Счастливые лапы',
                     style: TextStyle(
                       color: Color(0xFF0261BC),
                       fontSize: 42,
                       fontFamily: 'Comforter',
                       fontWeight: FontWeight.w400,
                       height: 0,
-                      letterSpacing: -0.63,
+                      letterSpacing: -0.44,
                     ),
                   ),
                   SizedBox(
                     height: 40,
                   ),
                   Text(
-                    'добро пожаловать',
+                    'Добро пожаловать',
                     style: TextStyle(
                       color: Color(0xFF0261BC),
                       fontSize: 18,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:laps/pages/home.dart';
 import 'package:laps/pages/login.dart';
 import 'package:laps/pages/auth.dart';
+import 'package:flutter/services.dart';
 import 'package:laps/pages/registration.dart';
 
 void main() {
@@ -15,7 +16,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Скрытие статус бара
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return MaterialApp(
+            
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
@@ -25,5 +29,6 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomePage(),
       },
     );
+    
   }
 }

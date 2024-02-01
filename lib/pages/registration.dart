@@ -37,18 +37,18 @@ class _RegistrPage extends State {
               Padding(
                 padding: EdgeInsets.all(5),
                 child: Text(
-                  'Четыре лапы',
+                  'Счастливые лапы',
                   style: TextStyle(
                     color: Color(0xFF0261BC),
                     fontSize: 36,
                     fontFamily: 'Comforter',
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.54,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: -0.44,
                   ),
                 ),
               ),
               SizedBox(
-                height: 25,
+                height: 20,
               ),
               Align(
                 alignment: Alignment.center,
@@ -58,30 +58,30 @@ class _RegistrPage extends State {
                     color: Color(0xFF0261BC),
                     fontSize: 24,
                     fontFamily: 'Raleway',
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ),
               Column(
                 children: [
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Никнейм',
+                        'Имя',
                         style: TextStyle(
                           color: Color(0xFF0261BC),
                           fontSize: 15,
                           fontFamily: 'Raleway',
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
                       TextField(
                         controller: _usernameController,
@@ -91,29 +91,26 @@ class _RegistrPage extends State {
                           });
                         },
                         decoration: InputDecoration(
-                          hintText: 'Введите ваш никнейм',
+                          hintText: 'Введите ваше имя',
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: Color.fromARGB(255, 255, 255, 255),
                           hintStyle: TextStyle(
-                            color: Color(0x9966727F),
+                            color: Color.fromARGB(153, 63, 70, 78),
                             fontSize: 16,
                             fontFamily: 'Raleway',
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w900,
                             height: 0.08,
                             letterSpacing: 0.10,
                           ),
                           border: OutlineInputBorder(
                             // устанавливаем тонкую границу
-                            borderRadius: BorderRadius.circular(0),
-                            borderSide: BorderSide(
-                              color: Colors.grey, // устанавливаем цвет границы
-                              width: 1.0, // устанавливаем толщину границы
-                            ),
+                            borderRadius: BorderRadius.circular(15),
+                        
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       Text(
                         'Пароль',
@@ -121,11 +118,11 @@ class _RegistrPage extends State {
                           color: Color(0xFF0261BC),
                           fontSize: 15,
                           fontFamily: 'Raleway',
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
                       TextField(
                         controller: _passwordController,
@@ -140,25 +137,25 @@ class _RegistrPage extends State {
                           filled: true,
                           fillColor: Colors.white,
                           hintStyle: TextStyle(
-                            color: Color(0x9966727F),
+                            color: Color.fromARGB(153, 63, 70, 78),
                             fontSize: 16,
                             fontFamily: 'Raleway',
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w900,
                             height: 0.08,
                             letterSpacing: 0.10,
                           ),
                           border: OutlineInputBorder(
                             // устанавливаем тонкую границу
-                            borderRadius: BorderRadius.circular(0),
+                            borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide(
-                              color: Colors.grey, // устанавливаем цвет границы
+                              color: Color.fromARGB(220, 255, 255, 255), // устанавливаем цвет границы
                               width: 1.0, // устанавливаем толщину границы
                             ),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       Text(
                         'Пароль повторно',
@@ -166,11 +163,11 @@ class _RegistrPage extends State {
                           color: Color(0xFF0261BC),
                           fontSize: 15,
                           fontFamily: 'Raleway',
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
                       TextField(
                         onChanged: (value) {
@@ -184,16 +181,16 @@ class _RegistrPage extends State {
                           filled: true,
                           fillColor: Colors.white,
                           hintStyle: TextStyle(
-                            color: Color(0x9966727F),
+                            color: Color.fromARGB(153, 63, 70, 78),
                             fontSize: 16,
                             fontFamily: 'Raleway',
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w900,
                             height: 0.08,
                             letterSpacing: 0.10,
                           ),
                           border: OutlineInputBorder(
                             // устанавливаем тонкую границу
-                            borderRadius: BorderRadius.circular(0),
+                            borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide(
                               color: Colors.grey, // устанавливаем цвет границы
                               width: 1.0, // устанавливаем толщину границы
@@ -206,12 +203,12 @@ class _RegistrPage extends State {
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               Row(
                 children: [
                   Text(
-                    'я владею питомцем',
+                    'Я владею питомцем',
                     style: TextStyle(
                       color: Color(0xFF0261BC),
                       fontSize: 15,
@@ -260,8 +257,8 @@ class _RegistrPage extends State {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
-                            fontFamily: 'IBM Plex Sans',
-                            fontWeight: FontWeight.w500,
+                            fontFamily: 'RalewayNormal',
+                            fontWeight: FontWeight.w900,
                             height: 0.08,
                             letterSpacing: 0.10,
                           ),
@@ -285,23 +282,37 @@ class _RegistrPage extends State {
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.w200,
+                          fontFamily: 'RalewayNormal',
+                          fontWeight: FontWeight.w900,
                           height: 0.09,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      child: Image(
-                        alignment: Alignment.center,
-                        image: AssetImage('assets/images/vk.png'),
-                      ),
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              child: Image(
+                                alignment: Alignment.center,
+                                  image: AssetImage('assets/images/vk.png'),
+                              ),
+                            ),
+                            // Иконка Яндекса
+                            Image(
+                              alignment: Alignment.center,
+                              image: AssetImage('assets/images/yandex.png'),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
-                ),
+                ), 
               ),
             ],
           ),
